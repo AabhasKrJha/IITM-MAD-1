@@ -1,0 +1,29 @@
+<h1>Services</h1> <hr><br>
+
+<form method="POST" action="/api/services" class="d-flex gap-2 align-items-center">
+    <input placeholder="Enter Service name" type="text" class="form-control" id="service-name" name="service-name">
+    <input placeholder="Enter Service Price" type="number" class="form-control" id="base-price" name="base-price">
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<br><hr><br>
+
+<div class="row fw-bold">
+    <div class="col-1">#</div>
+    <div class="col-3">Name</div>
+    <div class="col-3">Price</div>
+    <div class="col-3">Actions</div>
+</div> <hr>
+{% for service in services %}
+    <div class="row align-items-center">
+        <div class="col-1 fw-bold">{{ loop.index }}</div>
+        <div class="col-3">{{ service.name }}</div>
+        <div class="col-3">{{ service.base_price }}</div>
+        <div class="col-3">
+            <form method="POST" action="/api/services/{{service.id}}/delete" class="d-flex gap-2 align-items-center">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+{% endfor %}

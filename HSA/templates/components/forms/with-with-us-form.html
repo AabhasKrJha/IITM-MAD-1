@@ -1,0 +1,70 @@
+<div class="d-flex flex-column align-items-center gap-3 p-5 bg-body-tertiary">
+    <h3>Work with HSA</h3>
+    <form class="d-flex flex-column gap-3 custom-width-form" action="/work-with-us" method="post">
+        <div class="form-group">
+            <label class="mb-1" for="name-input">Name</label>
+            <input name="name" type="text" class="form-control" id="name-input" aria-describedby="nameHelp" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label class="mb-1" for="email-input">Email address</label>
+            <input name="email" type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="service-select" class="mb-1">Service</label>
+            <select name="service_id" class="form-control" id="service-select">
+                <option value="" disabled selected>Select a service</option>
+                {% for service in services %}
+                    <option value="{{ service.id }}">{{ service.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="mb-1" for="password-input">Password</label>
+            <input name="password" type="password" class="form-control" id="password-input" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="state-select" class="mb-1">State</label>
+            <select name="state" class="form-control" id="state-select">
+                <option value="" disabled selected>Select a state</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="city-select" class="mb-1">City</label>
+            <select name="city" class="form-control" id="city-select" disabled>
+                <option value="" disabled selected>Select a city</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="mb-1" for="exp-input">Experience</label>
+            <input name="experience" type="number" class="form-control" id="exp-input" aria-describedby="expHelp" placeholder="Enter years of experience">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        {% if message %}
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    </form> <br>
+    <span>Already have an account? <a class="text-decoration-none" href="/login">Login</a></span>
+</div>
+
+<style>
+    .custom-width-form {
+        width: 90%;
+    }
+
+    @media (min-width: 576px) {
+        .custom-width-form {
+            width: 75vw;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .custom-width-form {
+            width: 500px;
+        }
+    }
+</style>
+
+<script type="module" src='{{ url_for("static", filename = "js/stateCitySelect.js") }}'></script>

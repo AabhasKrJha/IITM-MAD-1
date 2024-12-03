@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+{% block body %} 
+
+    <div class="m-4">
+        <h1>Service Requests</h1> <hr><br>
+
+        <div class="row fw-bold">
+            <div class="col-1">#</div>
+            <div class="col-1">Service</div>
+            <div class="col-2">Date (yyyy-mm-dd )</div>
+            <div class="col-3">Address</div>
+            <div class="col-1">Status</div>
+        </div> <hr>
+        {% for request in requests %}
+            <div class="row align-items-center" id="booking-row-{{ request.id }}">
+                <div class="col-1 fw-bold">{{ loop.index }}</div>
+                <div  class="col-1">{{ request.service.name }}</div>
+                <div class="col-2" id="date-{{ request.id }}">{{ request.date_of_request }}</div>
+                <div class="col-3">{{ request.address }}</div>
+                <div class="col-1">{{ request.status }}</div>
+            </div>
+            <hr>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

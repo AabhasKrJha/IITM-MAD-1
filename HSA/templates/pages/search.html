@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <div class="container py-4">
+        <input placeholder="Enter Service name" type="text" class="form-control" name="q" hx-get="/api/search" hx-trigger="keyup changed delay:500ms" hx-target="#results"> <br><br>
+        <div class="row fw-bold">
+            <div class="col-1">#</div>
+            <div class="col-2">Name</div>
+            <div class="col-2">Email</div>
+            <div class="col-1">Service</div>
+            <div class="col-1">Price</div>
+            <div class="col-1">State</div>
+            <div class="col-1">City</div>
+            <div class="col-1">Experience</div>
+            <div class="col-1"></div>
+        </div> <hr>
+        <div id="results"></div>
+    </div>
+{% endblock %}

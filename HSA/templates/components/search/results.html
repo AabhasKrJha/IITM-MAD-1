@@ -1,0 +1,20 @@
+{% for result in results %}
+    <div class="row align-items-center">
+        <div class="col-1 fw-bold">{{ loop.index }}</div>
+        <div class="col-2">{{ result.name }}</div>
+        <div class="col-2">{{ result.email }}</div>
+        <div class="col-1">{{ result.service }}</div>
+        <div class="col-1">{{ result.base_price }}</div>
+        <div class="col-1">{{ result.state }}</div>
+        <div class="col-1">{{ result.city }}</div>
+        <div class="col-1">{{ result.experience }}</div>
+        <div class="col-1">
+            {% if g.user %}
+                <a href="/booking/{{result.id}}" class="btn btn-primary fw-bold">Book</a>
+            {% else %}
+                <a href="/login?book={{result.id}}" class="btn btn-primary fw-bold">Book</a>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+{% endfor %}

@@ -1,0 +1,39 @@
+<h1>Service Providers</h1> <hr><br>
+
+<div class="row fw-bold">
+    <div class="col-1">#</div>
+    <div class="col-3">Name</div>
+    <div class="col-3">Email</div>
+    <div class="col-2">Service</div>
+    <div class="col-2">Status</div>
+    <div class="col-1">Actions</div>
+</div> <hr>
+{% for provider in providers %}
+    <div class="row align-items-center" id="provider-row-{{ provider.id }}">
+        <div class="col-1 fw-bold">{{ loop.index }}</div>
+        <div class="col-3">{{ provider.name }}</div>
+        <div class="col-3">{{ provider.email }}</div>
+        <div class="col-2">{{ provider.service.name }}</div>
+        <div class="col-2">{{ 'Flagged' if provider.flagged else 'Not Flagged' if provider.approved else 'Not Approved' }}</div>
+        <div class="col-1">
+            {% if provider.approved %}
+                <button class="btn btn-danger" 
+                        hx-post="/api/users/{{ provider.id }}" 
+                        hx-vals='{"index": {{ loop.index }}}' 
+                        hx-target="#provider-row-{{ provider.id }}" 
+                        hx-swap="outerHTML">
+                    {{ 'Unflag' if provider.flagged else 'Flag' }}
+                </button>
+            {% else %}
+                <button class="btn btn-primary" 
+                        hx-post="/api/users/{{ provider.id }}/approve" 
+                        hx-vals='{"index": {{ loop.index }}}' 
+                        hx-target="#provider-row-{{ provider.id }}" 
+                        hx-swap="outerHTML">
+                    Approve
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+{% endfor %}

@@ -1,0 +1,14 @@
+<div class="flex-fill d-flex flex-column justify-content-center align-items-center">
+    <h1>Household Services Application</h1> <br>
+    {% if g.user %}
+        {% if g.user.role == "admin" %}
+            <a href="/admin" class="btn btn-primary fw-bold fs-5 py-2 px-4">Admin Dashboard</a>
+        {% elif g.user.role == "provider" %}
+            <a href="/dashboard" class="btn btn-primary fw-bold fs-5 py-2 px-4">My Dashboard</a>
+        {% else %}
+            <a href="/profile" class="btn btn-primary fw-bold fs-5 py-2 px-4">My Profile</a>
+        {% endif %}
+    {% else %}
+        <a href="/login" class="btn btn-primary fw-bold fs-5 py-2 px-4">Login</a>
+    {% endif %}
+</div>

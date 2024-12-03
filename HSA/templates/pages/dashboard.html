@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+{% block body %} 
+
+    <div class="m-4">
+        <h1>Service Requests</h1> <hr><br>
+
+        <div class="row fw-bold">
+            <div class="col-1">#</div>
+            <div class="col-2">Date (yyyy-mm-dd )</div>
+            <div class="col-3">Address</div>
+            <div class="col-1">Status</div>
+        </div> <hr>
+        {% for request in requests %}
+            <div class="row align-items-center" id="booking-row-{{ request.id }}">
+                <div class="col-1 fw-bold">{{ loop.index }}</div>
+                <div class="col-2" id="date-{{ request.id }}">{{ request.date_of_request }}</div>
+                <div class="col-3">{{ request.address }}</div>
+                <div class="col-1">{{ request.status }}</div>
+                <div class="col-1">
+                    {% if request.status == 'closed' %}
+                        <button type="button" class="btn btn-success">Completed</button>
+                    {% else %}
+                        <button class="btn btn-primary" 
+                                hx-post="{{ '/api/bookings/' ~ request.id ~ '/accept' if request.status == 'requested' else '/api/bookings/' ~ request.id ~ '/complete' }}"
+                                hx-vals='{"index": {{ loop.index }}}' 
+                                hx-target="#booking-row-{{ request.id }}" 
+                                hx-swap="outerHTML">
+                            {{ 'Accept' if request.status == 'requested' else ('Complete' if request.status == 'assigned') }}
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

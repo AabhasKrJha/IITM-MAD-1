@@ -1,0 +1,27 @@
+<h1>Consumers</h1> <hr><br>
+
+<div class="row fw-bold">
+    <div class="col-1">#</div>
+    <div class="col-3">Name</div>
+    <div class="col-3">Email</div>
+    <div class="col-2">Flagged</div>
+    <div class="col-3">Actions</div>
+</div> <hr>
+{% for consumer in consumers %}
+    <div class="row align-items-center" id="consumer-row-{{ consumer.id }}">
+        <div class="col-1 fw-bold">{{ loop.index }}</div>
+        <div class="col-3">{{ consumer.name }}</div>
+        <div class="col-3">{{ consumer.email }}</div>
+        <div class="col-2">{{ 'Yes' if consumer.flagged else 'No' }}</div>
+        <div class="col-3">
+            <button class="btn btn-danger" 
+                    hx-post="/api/users/{{ consumer.id }}" 
+                    hx-vals='{"index": {{ loop.index }}}' 
+                    hx-target="#consumer-row-{{ consumer.id }}" 
+                    hx-swap="outerHTML">
+                {{ 'Unflag' if consumer.flagged else 'Flag' }}
+            </button>
+        </div>
+    </div>
+    <hr>
+{% endfor %}

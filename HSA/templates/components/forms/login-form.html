@@ -1,0 +1,46 @@
+<div class="d-flex flex-column align-items-center gap-3 p-5 bg-body-tertiary">
+    <h3>Login to HSA</h3>
+    <form class="d-flex flex-column gap-3 custom-width-form" action="/login" method="post">
+        <div class="form-group">
+            <label class="mb-1" for="email-input">Email address</label>
+            <input name="email" type="email" class="form-control" id="email-input" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label class="mb-1" for="password-input">Password</label>
+            <input name="password" type="password" class="form-control" id="password-input" placeholder="Password">
+        </div>
+        {% if provider_id %}
+            <input name="provider_id" value="{{provider_id}}" hidden>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Login</button>
+        {% if message %}
+            <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    </form> <br>
+    {% if provider_id %}
+        <span>Don't have an account? <a class="text-decoration-none" href="/signup?book={{provider_id}}">Signup</a></span>
+    {% else %}
+        <span>Don't have an account? <a class="text-decoration-none" href="/signup">Signup</a></span>
+    {% endif %}
+</div>
+
+<style>
+    .custom-width-form {
+        width: 90%;
+    }
+
+    @media (min-width: 576px) {
+        .custom-width-form {
+            width: 75vw;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .custom-width-form {
+            width: 500px;
+        }
+    }
+</style>
